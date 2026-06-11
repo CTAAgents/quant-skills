@@ -42,6 +42,9 @@ This repository contains skill definitions for CTAAgents.
 9. **embodiskill** - 具身技能框架
    - Skill-aware reflection and evolution for embodied skills
 
+10. **skill-adaptor** - 技能适配器框架
+    - Trajectory-based LLM agent adaptive skill framework with explicit failure attribution
+
 ## Directory Structure
 
 ```
@@ -64,6 +67,9 @@ skills/
 │   └── SKILL.md
 ├── precious-metals-daily-news/
 │   └── SKILL.md
+├── skill-adaptor/
+│   ├── references/
+│   └── SKILL.md
 └── skillevolver/
     └── SKILL.md
 ```
@@ -74,5 +80,4 @@ Each skill is defined in a SKILL.md file following the CTAAgents skill specifica
 
 ## License
 
-MIT License# quant-cta-system
-# quant-cta-system
+MIT License
