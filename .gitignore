@@ -1,0 +1,16 @@
+# Ignore temporary files
+*.tmp
+*.log
+
+# Ignore .trae directory (local skill cache)
+.trae/
+
+# Ignore HTML files
+*.html
+
+# Ignore analysis reports
+半导体行业投资热点分析报告.md
+半导体行业投资热点分析框架.md
+贵金属市场综合快讯_*.md
+贵金属原油每日*.md
+贵金属原油每日*.html
