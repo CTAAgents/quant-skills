@@ -75,3 +75,4 @@ Each skill is defined in a SKILL.md file following the CTAAgents skill specifica
 ## License
 
 MIT License# quant-cta-system
+# quant-cta-system
