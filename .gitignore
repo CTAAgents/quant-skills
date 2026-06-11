@@ -14,3 +14,14 @@
 贵金属市场综合快讯_*.md
 贵金属原油每日*.md
 贵金属原油每日*.html
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env/
+.venv/

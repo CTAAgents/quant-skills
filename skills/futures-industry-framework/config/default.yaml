@@ -1,0 +1,142 @@
+# 期货产业链分析框架 - 配置文件
+
+# 产业链标准化配置
+industry_chain:
+  # 库存周期判定阈值
+  inventory_thresholds:
+    bullish_threshold: 55
+    bearish_threshold: 45
+    high_inventory_percentile: 0.7
+    low_inventory_percentile: 0.3
+  
+  # 利润结构判定权重
+  profit_weights:
+    upstream: 0.4
+    midstream: 0.35
+    downstream: 0.25
+  
+  # 评分维度权重
+  scoring_weights:
+    inventory: 0.25
+    profit: 0.30
+    behavior: 0.20
+    supply_demand: 0.15
+    basis: 0.10
+
+# 权重优化配置
+weight_optimization:
+  # 优化算法参数
+  optimization:
+    n_iterations: 1000
+    population_size: 100
+    mutation_rate: 0.1
+    crossover_rate: 0.8
+  
+  # 默认权重配置
+  default_weights:
+    industry_chain: 0.40
+    fundamental: 0.30
+    technical: 0.30
+  
+  # 子权重配置
+  sub_weights:
+    industry_chain:
+      inventory: 0.25
+      profit: 0.30
+      behavior: 0.20
+      supply_demand: 0.15
+      basis: 0.10
+    fundamental:
+      supply_demand_gap: 0.30
+      inventory_change: 0.25
+      profit_margin: 0.25
+      basis_structure: 0.20
+    technical:
+      trend: 0.30
+      momentum: 0.25
+      volatility: 0.15
+      volume: 0.15
+      pattern: 0.15
+
+# 共振检测配置
+resonance_detection:
+  # 信号判定阈值
+  thresholds:
+    bullish_threshold: 55
+    bearish_threshold: 45
+    strong_resonance_min: 2
+    extreme_resonance_min: 3
+    confidence_high: 0.8
+    confidence_medium: 0.6
+    confidence_low: 0.4
+  
+  # 维度权重
+  dimension_weights:
+    industry_chain: 0.35
+    fundamental: 0.30
+    technical: 0.35
+  
+  # 多时间周期权重
+  timeframe_weights:
+    daily: 0.30
+    weekly: 0.40
+    monthly: 0.30
+
+# 交易配置
+trading:
+  # 仓位配置
+  position:
+    strong_resonance: 0.30
+    moderate_resonance: 0.15
+    weak_resonance: 0.05
+  
+  # 止损止盈
+  risk_management:
+    stop_loss_pct: 0.05
+    take_profit_1: 0.08
+    take_profit_2: 0.15
+    take_profit_3: 0.25
+  
+  # 风控参数
+  risk_control:
+    max_position_size: 0.30
+    max_drawdown_threshold: 0.15
+    min_confidence_threshold: 0.6
+
+# 数据源配置
+data_sources:
+  # 期货数据源
+  futures:
+    primary: "tqsdk"
+    secondary: "vnpy"
+    fallback: "backtrader"
+  
+  # 数据库配置
+  database:
+    type: "duckdb"
+    path: "data/futures_analysis.duckdb"
+  
+  # 缓存配置
+  cache:
+    enabled: true
+    ttl_hours: 24
+
+# 输出配置
+output:
+  # 报告输出
+  reports:
+    format: "markdown"
+    save_path: "output/reports"
+    auto_generate: true
+  
+  # 图表输出
+  charts:
+    format: "png"
+    save_path: "output/charts"
+    dpi: 300
+  
+  # 日志配置
+  logging:
+    level: "INFO"
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    file: "output/logs/framework.log"
