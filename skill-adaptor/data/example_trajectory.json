@@ -1,0 +1,56 @@
+{
+  "trajectory_id": "traj_001",
+  "task_id": "webshop_001",
+  "success": false,
+  "final_reward": -0.5,
+  "steps": [
+    {
+      "step_id": 0,
+      "state": {
+        "page": "homepage",
+        "items": ["laptop", "phone", "tablet"]
+      },
+      "action": "search_laptop",
+      "observation": "Found 10 laptops",
+      "reward": 0.1,
+      "skill_invoked": "search_skill"
+    },
+    {
+      "step_id": 1,
+      "state": {
+        "page": "search_results",
+        "selected": null
+      },
+      "action": "select_first_item",
+      "observation": "Selected laptop: Cheap Laptop",
+      "reward": 0.0,
+      "skill_invoked": "selection_skill"
+    },
+    {
+      "step_id": 2,
+      "state": {
+        "page": "product_detail",
+        "in_stock": false
+      },
+      "action": "add_to_cart",
+      "observation": "Error: Item out of stock",
+      "reward": -0.5,
+      "skill_invoked": "cart_skill"
+    },
+    {
+      "step_id": 3,
+      "state": {
+        "page": "product_detail",
+        "in_stock": false
+      },
+      "action": "go_back",
+      "observation": "Back to search results",
+      "reward": -0.1,
+      "skill_invoked": null
+    }
+  ],
+  "metadata": {
+    "environment": "webshop",
+    "agent": "test_agent_v1"
+  }
+}

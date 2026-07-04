@@ -1,0 +1,29 @@
+# 燃料油分析技能 v2.0.0 依赖清单
+# Python 版本: 3.8+
+
+# 核心依赖
+pandas>=2.0.0
+numpy>=1.23.0
+
+# 数据库
+duckdb>=0.8.0
+
+# 技术指标
+ta-lib>=0.4.28
+
+# 图表可视化
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# 数据源
+tqsdk>=3.0.0
+
+# 配置文件
+python-dotenv>=1.0.0
+
+# 测试框架
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# 工具库
+python-dateutil>=2.8.0

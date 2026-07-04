@@ -1,0 +1,384 @@
+{
+  "version": "3.0.0",
+  "name": "黑色系心跳监控",
+  "description": "监控螺纹钢/热卷/铁矿石/焦炭/焦煤五大品种 + 产业链联动。核心驱动：国内政策+供需+库存+利润。",
+  "timezone": "Asia/Shanghai",
+  "monitor_root": ".",
+
+  "trading_hours": {
+    "sessions": [
+      { "start": "09:00", "end": "15:00", "break_start": "10:15", "break_end": "10:30" },
+      { "start": "21:00", "end": "23:00" }
+    ],
+    "note": "上期所/大商所/郑商所日盘+夜盘。非交易时段心跳间隔固定240分钟。"
+  },
+
+  "products": {
+    "RB": { "name": "螺纹钢", "exchange": "SHFE", "unit": "元/吨", "lot_size": 10,
+      "url_params": { "cngold": "luowengang", "eastmoney": "RB" } },
+    "HC": { "name": "热卷", "exchange": "SHFE", "unit": "元/吨", "lot_size": 10,
+      "url_params": { "cngold": "rejuanjuanban", "eastmoney": "HC" } },
+    "I":  { "name": "铁矿石", "exchange": "DCE", "unit": "元/吨", "lot_size": 100,
+      "url_params": { "cngold": "tiekuangshi", "eastmoney": "I" } },
+    "J":  { "name": "焦炭", "exchange": "DCE", "unit": "元/吨", "lot_size": 100,
+      "url_params": { "cngold": "jiaotan", "eastmoney": "J" } },
+    "JM": { "name": "焦煤", "exchange": "DCE", "unit": "元/吨", "lot_size": 60,
+      "url_params": { "cngold": "jiaomei", "eastmoney": "JM" } }
+  },
+
+  "data_sources": [
+    {
+      "id": "cngold_futures",
+      "category": "realtime",
+      "priority": 1,
+      "enabled": true,
+      "reliability": 85,
+      "url_template": "https://www.cngold.org/qihuo/{cngold}.html",
+      "extraction_type": "html_parse",
+      "field_mappings": {
+        "price": "最新价",
+        "change_pct": "涨跌幅",
+        "prev_close": "昨收",
+        "open": "今开",
+        "high": "最高",
+        "low": "最低",
+        "volume": "成交量",
+        "open_interest": "持仓量"
+      },
+      "refresh_minutes": 5,
+      "max_staleness_min": 5,
+      "max_deviation_pct": 2,
+      "note": "金投网期货实时行情。免费，无需API key。交易时段内5分钟刷新。"
+    },
+    {
+      "id": "eastmoney_futures",
+      "category": "realtime",
+      "priority": 2,
+      "enabled": true,
+      "reliability": 90,
+      "url_template": "https://futures.eastmoney.com/qihuo/{eastmoney}.html",
+      "extraction_type": "html_parse",
+      "field_mappings": {
+        "price": "最新价",
+        "change_pct": "涨跌幅",
+        "prev_close": "昨结",
+        "open": "今开",
+        "high": "最高",
+        "low": "最低",
+        "volume": "成交量",
+        "open_interest": "持仓量"
+      },
+      "refresh_minutes": 5,
+      "max_staleness_min": 5,
+      "max_deviation_pct": 2,
+      "note": "东方财富期货行情。备用源，数据最全含持仓龙虎榜。"
+    },
+    {
+      "id": "mysteel_spot",
+      "category": "fundamental",
+      "priority": 1,
+      "enabled": true,
+      "reliability": 85,
+      "extraction_type": "web_search",
+      "query_template": "我的钢铁网 {product_name} 现货价格 今日",
+      "refresh_minutes": 1440,
+      "max_staleness_min": 2880,
+      "note": "Mysteel现货报价，日度更新。"
+    },
+    {
+      "id": "mysteel_inventory",
+      "category": "fundamental",
+      "priority": 1,
+      "enabled": true,
+      "reliability": 80,
+      "extraction_type": "web_search",
+      "query_template": "Mysteel {product_name} 库存 本周",
+      "refresh_minutes": 1440,
+      "max_staleness_min": 10080,
+      "note": "Mysteel周度库存数据，通常周四/周五发布。"
+    },
+    {
+      "id": "blast_furnace",
+      "category": "fundamental",
+      "priority": 1,
+      "enabled": true,
+      "reliability": 80,
+      "extraction_type": "web_search",
+      "query_template": "247家钢厂高炉开工率 铁水产量 本周",
+      "refresh_minutes": 1440,
+      "max_staleness_min": 10080,
+      "note": "Mysteel 247家钢厂高炉开工率，周度数据。"
+    },
+    {
+      "id": "news_policy",
+      "category": "news",
+      "priority": 1,
+      "enabled": true,
+      "reliability": 75,
+      "extraction_type": "web_search",
+      "query_template": "黑色系 限产 粗钢产量 政策 最新",
+      "refresh_minutes": 60,
+      "max_staleness_min": 1440,
+      "note": "产业政策+限产新闻"
+    },
+    {
+      "id": "news_macro",
+      "category": "news",
+      "priority": 1,
+      "enabled": true,
+      "reliability": 75,
+      "extraction_type": "web_search",
+      "query_template": "PMI 房地产 基建 专项债 最新",
+      "refresh_minutes": 60,
+      "max_staleness_min": 1440,
+      "note": "宏观数据+房地产+基建新闻"
+    },
+    {
+      "id": "news_spot",
+      "category": "news",
+      "priority": 1,
+      "enabled": true,
+      "reliability": 75,
+      "extraction_type": "web_search",
+      "query_template": "铁矿石 螺纹钢 焦炭 期货 今日",
+      "refresh_minutes": 60,
+      "max_staleness_min": 1440,
+      "note": "期货市场综合新闻"
+    }
+  ],
+
+  "focus_types": {
+    "policy_macro": {
+      "trigger_conditions": [
+        { "kind": "keyword", "keywords": [
+          "发改委", "工信部", "限产", "粗钢产量", "产能置换", "环保限产",
+          "PMI", "GDP", "固投", "基建", "房地产", "房贷", "LPR", "降准", "降息",
+          "专项债", "保交楼", "城中村", "设备更新"
+        ], "source_ids": ["news_policy", "news_macro"] }
+      ],
+      "impact_base": 0.4,
+      "impact_bonuses": [
+        { "condition": "news keywords contain '产能红线' or '房地产重磅'", "boost": 0.2 }
+      ],
+      "check_interval_high": 60, "check_interval_medium": 90, "check_interval_low": 120
+    },
+    "supply_steel": {
+      "trigger_conditions": [
+        { "kind": "fundamental_change", "field": "blast_furnace_rate", "threshold_pct": 2.0, "direction": "either",
+          "source_ids": ["blast_furnace"] },
+        { "kind": "keyword", "keywords": [
+          "高炉开工率", "铁水产量", "电炉开工", "产能利用率", "检修", "复产",
+          "粗钢日产", "唐山限产"
+        ], "source_ids": ["news_policy", "news_spot"] }
+      ],
+      "impact_base": 0.3,
+      "impact_bonuses": [
+        { "condition": "blast_furnace_rate change > 5 over 3 weeks", "boost": 0.15 }
+      ],
+      "check_interval_high": 60, "check_interval_medium": 90, "check_interval_low": 120
+    },
+    "demand_steel": {
+      "trigger_conditions": [
+        { "kind": "keyword", "keywords": [
+          "成交", "出库", "表观需求", "建材成交", "水泥", "混凝土",
+          "新开工", "施工面积", "竣工", "拿地", "挖掘机"
+        ], "source_ids": ["news_macro", "news_spot"] }
+      ],
+      "impact_base": 0.25,
+      "impact_bonuses": [
+        { "condition": "apparent_demand change > 10 for 2 weeks", "boost": 0.1 }
+      ],
+      "check_interval_high": 60, "check_interval_medium": 90, "check_interval_low": 120
+    },
+    "raw_material": {
+      "trigger_conditions": [
+        { "kind": "price_change", "products": ["I", "J"], "threshold_pct": 3.0, "direction": "either",
+          "note": "铁矿石>3%或焦炭>3.5%" },
+        { "kind": "keyword", "keywords": [
+          "铁矿石到港", "铁矿发运", "澳巴发运", "港口库存", "疏港量",
+          "焦煤进口", "蒙煤通关", "焦炭提涨", "焦炭提降"
+        ], "source_ids": ["news_spot"] }
+      ],
+      "impact_base": 0.35,
+      "impact_bonuses": [
+        { "condition": "max(abs(I.change_pct), abs(J.change_pct)) > 4", "boost": 0.15 }
+      ],
+      "check_interval_high": 30, "check_interval_medium": 60, "check_interval_low": 120
+    },
+    "inventory": {
+      "trigger_conditions": [
+        { "kind": "keyword", "keywords": [
+          "螺纹钢库存", "热卷库存", "五大品种库存", "社库", "厂库",
+          "去库", "累库", "库存拐点"
+        ], "source_ids": ["news_spot"] }
+      ],
+      "impact_base": 0.3,
+      "impact_bonuses": [
+        { "condition": "inventory inflection confirmed (second week same direction)", "boost": 0.2 }
+      ],
+      "check_interval_high": 60, "check_interval_medium": 90, "check_interval_low": 120
+    },
+    "profit_margin": {
+      "trigger_conditions": [
+        { "kind": "supply_chain_resonance",
+          "conditions": [
+            { "products": ["I"], "threshold_pct": 1.0, "direction": "above" },
+            { "products": ["J"], "threshold_pct": 1.0, "direction": "above" },
+            { "products": ["RB"], "threshold_pct": 0.5, "direction": "below" }
+          ],
+          "confidence_formula": "0.6 + 0.2 * (I.change_pct + J.change_pct - RB.change_pct) / 3"
+        },
+        { "kind": "keyword", "keywords": [
+          "盘面利润", "钢厂利润", "吨钢利润", "螺纹毛利", "焦化利润", "螺矿比"
+        ], "source_ids": ["news_spot"] }
+      ],
+      "impact_base": 0.2,
+      "impact_bonuses": [
+        { "condition": "rebar_iron_ratio < 3.8", "boost": 0.2 }
+      ],
+      "check_interval_high": 60, "check_interval_medium": 90, "check_interval_low": 120
+    }
+  },
+
+  "focus_chains": [
+    {
+      "name": "raw_material_resonance",
+      "conditions": [
+        { "kind": "product_compare", "products": ["I", "J"], "operator": "all_above", "threshold_pct": 3.0 }
+      ],
+      "target_focus": "raw_material",
+      "confidence_boost": 0.15
+    },
+    {
+      "name": "profit_squeeze_resonance",
+      "conditions": [
+        { "kind": "product_compare", "products": ["RB", "HC"], "operator": "all_below", "threshold_pct": 2.0 },
+        { "kind": "product_compare", "products": ["I"], "operator": "all_above", "threshold_pct": 1.0 }
+      ],
+      "target_focus": "profit_margin",
+      "confidence_boost": 0.2
+    },
+    {
+      "name": "supply_demand_dual_strong",
+      "conditions": [
+        { "kind": "keyword", "keywords": ["去库", "库存下降"], "source_ids": ["news_spot"] },
+        { "kind": "keyword", "keywords": ["开工率上升", "复产"], "source_ids": ["news_policy"] }
+      ],
+      "target_focus": "supply_steel",
+      "confidence_boost": 0.15
+    }
+  ],
+
+  "tech_signals": [
+    { "id": "T1", "name": "趋势延续", "type": "trend",
+      "condition": { "kind": "multi_day_trend", "products": ["RB", "HC"], "days": 3, "min_pct_per_day": 1.0, "direction": "same" },
+      "weight": 0.3, "requires_close": true },
+    { "id": "T2", "name": "关键位突破", "type": "breakout",
+      "condition": { "kind": "integer_level_break", "products": ["RB"], "levels": [3000, 3300, 3400, 3600], "direction": "either" },
+      "weight": 0.4, "requires_close": true },
+    { "id": "T3", "name": "产业链背离", "type": "divergence",
+      "condition": { "kind": "supply_chain_divergence",
+        "upstream": ["I", "J"], "upstream_min_pct": 2.0,
+        "downstream": ["RB", "HC"], "downstream_max_pct": 0.5 },
+      "weight": 0.35, "requires_close": false },
+    { "id": "T4", "name": "持仓异动", "type": "position",
+      "condition": { "kind": "open_interest_change", "products": ["RB", "I"], "min_pct": 10, "direction": "either" },
+      "weight": 0.25, "requires_close": false },
+    { "id": "T5", "name": "基差异动", "type": "spread",
+      "condition": { "kind": "basis_extreme", "product": "RB", "basis": "futures - spot", "high_threshold": 200, "low_threshold": -50 },
+      "weight": 0.3, "requires_close": false },
+    { "id": "T6", "name": "螺矿比极端", "type": "spread",
+      "condition": { "kind": "ratio_extreme", "metric": "rebar_iron_ratio", "low": 3.8, "high": 5.0 },
+      "weight": 0.3, "requires_close": false },
+    { "id": "T7", "name": "库存拐点确认", "type": "inventory",
+      "condition": { "kind": "inventory_inflection", "product": "RB", "consecutive_weeks": 2, "source": "mysteel_inventory" },
+      "weight": 0.35, "requires_close": false },
+    { "id": "T8", "name": "卷螺差异动", "type": "spread",
+      "condition": { "kind": "price_diff_extreme", "products": ["HC", "RB"], "high_threshold": 200, "low_threshold": -50 },
+      "weight": 0.2, "requires_close": false }
+  ],
+
+  "link_metrics": [
+    { "name": "螺矿比", "code": "rebar_iron_ratio", "formula": "RB_price / I_price",
+      "products": ["RB", "I"], "normal_range": [3.8, 5.0], "extreme_low": 3.5, "extreme_high": 5.5, "unit": "ratio" },
+    { "name": "卷螺差", "code": "hc_rb_spread", "formula": "HC_price - RB_price",
+      "products": ["HC", "RB"], "normal_range": [-50, 200], "unit": "元" },
+    { "name": "盘面利润(螺纹)", "code": "rebar_margin", "formula": "RB_price - 1.6*I_price - 0.45*J_price - 300",
+      "products": ["RB", "I", "J"], "unit": "元/吨" }
+  ],
+
+  "scoring": {
+    "novelty_weight": 0.5,
+    "impact_weight": 0.2,
+    "reliability_weight": 0.2,
+    "tech_signal_weight": 0.1,
+    "push_threshold": 0.55,
+    "calibration_range": [0.35, 0.75]
+  },
+
+  "thresholds": {
+    "extreme_conditions": [
+      { "kind": "price_change", "products": ["RB"], "threshold_pct": 5.0, "direction": "either" },
+      { "kind": "price_change", "products": ["I"], "threshold_pct": 5.0, "direction": "either" },
+      { "kind": "keyword", "keywords": ["限产令", "房地产重磅", "关税"], "source_ids": ["news_policy"] }
+    ]
+  },
+
+  "report_path": "C:\\Users\\yangd\\Documents\\QClaw\\Commodities\\Reports\\黑色系心跳监控",
+  "report_name_format": "heartbeat_black_HHmm.md",
+
+  "schedule": {
+    "default_interval_min": 120,
+    "non_trading_interval_min": 240,
+    "urgent_threshold": 0.7,
+    "downgrade_threshold": 0.3,
+    "max_urgent_cron_hours": 6,
+    "calibration_frequency": 10,
+    "focus_intervals": {
+      "raw_material":   [30, 60, 120],
+      "policy_macro":   [60, 90, 120],
+      "supply_steel":   [60, 90, 120],
+      "demand_steel":   [60, 90, 120],
+      "inventory":      [60, 90, 120],
+      "profit_margin":  [60, 90, 120],
+      "default":        [120, 120, 120]
+    }
+  },
+
+  "user_feedback": {
+    "enabled": true,
+    "learning_rate": 0.1,
+    "decay_days": 30,
+    "signal_type_weights": {
+      "policy_macro": 1.0, "supply_steel": 1.0, "demand_steel": 1.0,
+      "raw_material": 1.0, "inventory": 1.0, "profit_margin": 1.0
+    }
+  },
+
+  "initial_state": {
+    "signal_history": [],
+    "priority_history": [],
+    "pending_feedback": [],
+    "threshold_calibration": { "current_threshold": 0.55, "calibration_count": 0, "last_calibration": null },
+    "temp_cron_jobs": [],
+    "source_health": {
+      "cngold_futures": { "category": "realtime", "url": "https://www.cngold.org/qihuo/", "score": 0.85, "success_count": 0, "fail_count": 0, "stale_count": 0, "avg_freshness_min": null, "last_success": null, "last_fail": null, "fail_reason": null, "auto_discovered": false },
+      "eastmoney_futures": { "category": "realtime", "url": "https://futures.eastmoney.com/", "score": 0.90, "success_count": 0, "fail_count": 0, "stale_count": 0, "avg_freshness_min": null, "last_success": null, "last_fail": null, "fail_reason": null, "auto_discovered": false },
+      "mysteel_spot": { "category": "fundamental", "url": "web_search", "score": 0.85, "success_count": 0, "fail_count": 0, "stale_count": 0, "avg_freshness_min": null, "last_success": null, "last_fail": null, "fail_reason": null, "auto_discovered": false },
+      "mysteel_inventory": { "category": "fundamental", "url": "web_search", "score": 0.80, "success_count": 0, "fail_count": 0, "stale_count": 0, "avg_freshness_min": null, "last_success": null, "last_fail": null, "fail_reason": null, "auto_discovered": false }
+    }
+  },
+
+  "red_rules": {
+    "no_fabricated_data": true,
+    "right_side_trading": true,
+    "min_quantifiable_signals": 2,
+    "primary_timeframe": "daily_4h",
+    "disclaimer_required": true,
+    "language": "zh-CN",
+    "no_emoji": true,
+    "novelty_guard_enabled": true,
+    "supply_chain_analysis": true,
+    "trading_hours_required": true
+  }
+}

@@ -1,0 +1,23 @@
+# Database files
+*.duckdb
+*.duckdb.wal
+*.db
+*.sqlite
+
+# Output/cache files
+**/output/*
+**/data/*.csv
+**/__pycache__/
+**/.pytest_cache/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Environment
+.env
+.venv
+venv/
+
+# OS
+.DS_Store
+Thumbs.db

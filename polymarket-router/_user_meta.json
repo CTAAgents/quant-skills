@@ -1,0 +1,9 @@
+{
+  "agent_created": true,
+  "version": "1.1.0",
+  "updated": "2026-06-26",
+  "restructured": "2026-06-25",
+  "structure": "standard",
+  "description": "Polymarket预测市场多源数据集成路由系统 - 标准skill结构",
+  "changelog": "v1.1.0: 添加商品价格预测市场数据解析最佳实践、报告生成指南、常见错误处理"
+}

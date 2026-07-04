@@ -1,0 +1,326 @@
+{
+  "version": "3.0.0",
+  "name": "原油贵金属心跳监控",
+  "description": "监控 WTI/布伦特原油、黄金/白银/铂金/钯金 + 霍尔木兹海峡地缘风险",
+  "timezone": "Asia/Shanghai",
+  "monitor_root": ".",
+  "trading_hours": null,
+
+  "products": {
+    "WTI": { "name": "WTI原油", "exchange": "NYMEX", "unit": "美元/桶", "lot_size": 1000,
+      "url_params": { "tag": "wti" } },
+    "BRENT": { "name": "布伦特原油", "exchange": "ICE", "unit": "美元/桶", "lot_size": 1000,
+      "url_params": { "tag": "brent" } },
+    "GOLD": { "name": "黄金", "exchange": "COMEX", "unit": "美元/盎司", "lot_size": 100,
+      "url_params": { "tag": "gold" } },
+    "SILVER": { "name": "白银", "exchange": "COMEX", "unit": "美元/盎司", "lot_size": 5000,
+      "url_params": { "tag": "silver" } },
+    "PLATINUM": { "name": "铂金", "exchange": "NYMEX", "unit": "美元/盎司", "lot_size": 50,
+      "url_params": { "tag": "platinum" } },
+    "PALLADIUM": { "name": "钯金", "exchange": "NYMEX", "unit": "美元/盎司", "lot_size": 100,
+      "url_params": { "tag": "palladium" } }
+  },
+
+  "data_sources": [
+    {
+      "id": "straits_live",
+      "category": "realtime",
+      "priority": 1,
+      "enabled": true,
+      "reliability": 80,
+      "url_static": "https://straits.live/status",
+      "extraction_type": "json",
+      "field_mappings": {
+        "wti": "wti",
+        "brent": "brent",
+        "change24h": "change24h",
+        "change24hUsd": "change24hUsd",
+        "hormuz_verdict": "verdict.status",
+        "crisis_pressure": "hormuzIndex.crisisPressure.value",
+        "crisis_band": "hormuzIndex.crisisPressure.band",
+        "escalation_probability": "hormuzIndex.escalationProbability.value",
+        "transits_count": "transits.count",
+        "transits_age_days": "transits.asOfAgeDays",
+        "ais_concurrent": "aisConcurrentInZone",
+        "stranded": "stranded",
+        "insurance_multiple": "insurance.multiple",
+        "ais_gaps": "aisGaps.count",
+        "data_as_of": "asOf",
+        "oil_as_of": "oilAsOf"
+      },
+      "refresh_minutes": 1,
+      "max_staleness_min": 30,
+      "max_deviation_pct": 5,
+      "note": "霍尔木兹海峡+原油一站式实时数据。⚠️ change24h用瞬时价格有系统性偏差，需交叉验证。",
+      "cross_validation": {
+        "field": "change24h",
+        "trigger_pct": 3.0,
+        "fallback_source": "cngold_oil",
+        "deviation_rules": [
+          { "max_pct": 30, "action": "use_primary", "label": "[VERIFIED]" },
+          { "max_pct": 60, "action": "use_fallback", "label": "[CORRECTED]" },
+          { "max_pct": 999, "action": "force_fallback", "label": "[OVERRIDE]" }
+        ]
+      }
+    },
+    {
+      "id": "kitco_metals",
+      "category": "realtime",
+      "priority": 1,
+      "enabled": true,
+      "reliability": 90,
+      "url_static": "https://www.kitco.com/price/precious-metals",
+      "extraction_type": "html_parse",
+      "field_mappings": {
+        "gold_price": "Gold LAST",
+        "gold_change": "Gold CHANGE",
+        "silver_price": "Silver LAST",
+        "silver_change": "Silver CHANGE",
+        "platinum_price": "Platinum LAST",
+        "palladium_price": "Palladium LAST"
+      },
+      "refresh_minutes": 1,
+      "max_staleness_min": 30,
+      "max_deviation_pct": 3,
+      "note": "Kitco贵金属实时报价。免费，数据准确度最高。备用源：web_search"
+    },
+    {
+      "id": "cngold_oil",
+      "category": "realtime",
+      "priority": 2,
+      "enabled": true,
+      "reliability": 90,
+      "url_static": "https://quote.cngold.org/oil/gjyy.html",
+      "extraction_type": "html_parse",
+      "field_mappings": {
+        "wti_price": "WTI最新价",
+        "wti_prev_close": "WTI昨收",
+        "brent_price": "布伦特最新价",
+        "brent_prev_close": "布伦特昨收"
+      },
+      "refresh_minutes": 5,
+      "max_staleness_min": 30,
+      "max_deviation_pct": 3,
+      "note": "金投网国际油价。作为straits.live油价交叉验证源。结算价基准。"
+    },
+    {
+      "id": "news_geopolitics_cn",
+      "category": "news",
+      "priority": 1,
+      "enabled": true,
+      "reliability": 70,
+      "extraction_type": "web_search",
+      "query_template_cn": "霍尔木兹海峡 原油 最新",
+      "query_template_en": "Iran oil Hormuz latest news",
+      "refresh_minutes": 60,
+      "max_staleness_min": 1440,
+      "note": "霍尔木兹海峡+中东地缘新闻，freshness=day"
+    },
+    {
+      "id": "news_supply",
+      "category": "news",
+      "priority": 1,
+      "enabled": true,
+      "reliability": 70,
+      "extraction_type": "web_search",
+      "query_template_cn": "OPEC 产量 最新 决定",
+      "refresh_minutes": 60,
+      "max_staleness_min": 1440,
+      "note": "OPEC供给端新闻，freshness=day"
+    },
+    {
+      "id": "polymarket_kalshi",
+      "category": "fundamental",
+      "priority": 3,
+      "enabled": true,
+      "reliability": 60,
+      "extraction_type": "web_search",
+      "query_template_cn": "Kalshi Polymarket 霍尔木兹 原油 黄金 概率 赔率",
+      "refresh_minutes": 240,
+      "max_staleness_min": 10080,
+      "note": "预测市场赔率数据。Polymarket/Kalshi直连被墙，通过中文财经媒体间接获取引用。"
+    }
+  ],
+
+  "focus_types": {
+    "geopolitics": {
+      "trigger_conditions": [
+        { "kind": "keyword", "keywords": ["封锁", "导弹", "冲突", "谈判", "停火", "核协议", "军事", "袭击"],
+          "source_ids": ["news_geopolitics_cn"] },
+        { "kind": "fundamental_change", "field": "crisis_pressure", "threshold_pct": 70, "direction": "above",
+          "source_ids": ["straits_live"] }
+      ],
+      "impact_base": 0.4,
+      "impact_bonuses": [
+        { "condition": "crisis_pressure > 90", "boost": 0.2 }
+      ],
+      "check_interval_high": 30,
+      "check_interval_medium": 60,
+      "check_interval_low": 120
+    },
+    "supply": {
+      "trigger_conditions": [
+        { "kind": "price_change", "products": ["WTI", "BRENT"], "threshold_pct": 2.0, "direction": "either" },
+        { "kind": "keyword", "keywords": ["EIA库存", "OPEC增产", "OPEC减产", "API库存", "产量配额"],
+          "source_ids": ["news_supply"] }
+      ],
+      "impact_base": 0.3,
+      "impact_bonuses": [
+        { "condition": "max(abs(WTI.change_pct), abs(BRENT.change_pct)) > 5", "boost": 0.2 }
+      ],
+      "check_interval_high": 60,
+      "check_interval_medium": 90,
+      "check_interval_low": 120
+    },
+    "precious_metals": {
+      "trigger_conditions": [
+        { "kind": "price_change", "products": ["GOLD", "SILVER"], "threshold_pct": 1.5, "direction": "either" },
+        { "kind": "keyword", "keywords": ["央行购金", "ETF流入", "避险", "去美元化", "央行黄金"], "source_ids": ["news_geopolitics_cn"] }
+      ],
+      "impact_base": 0.2,
+      "impact_bonuses": [
+        { "condition": "GOLD.change_pct > 0 AND SILVER.change_pct > 0 AND abs(GOLD.change_pct - SILVER.change_pct) < 1", "boost": 0.1 }
+      ],
+      "check_interval_high": 60,
+      "check_interval_medium": 90,
+      "check_interval_low": 120
+    },
+    "demand": {
+      "trigger_conditions": [
+        { "kind": "keyword", "keywords": ["PMI", "衰退", "中国需求", "炼厂开工", "IEA", "需求预测"],
+          "source_ids": ["news_supply"] }
+      ],
+      "impact_base": 0.15,
+      "impact_bonuses": [],
+      "check_interval_high": 60,
+      "check_interval_medium": 90,
+      "check_interval_low": 120
+    },
+    "dollar": {
+      "trigger_conditions": [
+        { "kind": "keyword", "keywords": ["美元指数", "美联储", "利率决议", "非农", "CPI", "PCE"],
+          "source_ids": ["news_geopolitics_cn"] }
+      ],
+      "impact_base": 0.15,
+      "impact_bonuses": [],
+      "check_interval_high": 60,
+      "check_interval_medium": 90,
+      "check_interval_low": 120
+    },
+    "policy": {
+      "trigger_conditions": [
+        { "kind": "keyword", "keywords": ["美联储", "利率", "制裁", "关税", "贸易战", "SWIFT"],
+          "source_ids": ["news_geopolitics_cn"] }
+      ],
+      "impact_base": 0.2,
+      "impact_bonuses": [
+        { "condition": "news contains '美联储决议' or 'FOMC'", "boost": 0.1 }
+      ],
+      "check_interval_high": 60,
+      "check_interval_medium": 90,
+      "check_interval_low": 120
+    }
+  },
+
+  "focus_chains": [
+    {
+      "name": "geopolitics_drives_gold",
+      "conditions": [
+        { "kind": "focus_active", "focus": "geopolitics", "min_confidence": 0.7 }
+      ],
+      "target_focus": "precious_metals",
+      "confidence_boost": 0.15
+    }
+  ],
+
+  "tech_signals": [
+    { "id": "T1", "name": "趋势延续", "type": "trend",
+      "condition": { "kind": "multi_day_trend", "products": ["WTI"], "days": 3, "min_pct_per_day": 2.0, "direction": "same" },
+      "weight": 0.3, "requires_close": true },
+    { "id": "T2", "name": "关键位突破", "type": "breakout",
+      "condition": { "kind": "integer_level_break", "products": ["WTI"], "levels": [65, 70, 75, 80], "direction": "either" },
+      "weight": 0.4, "requires_close": true },
+    { "id": "T3", "name": "极值反转", "type": "reversal",
+      "condition": { "kind": "extreme_narrowing", "products": ["WTI"], "day1_min_pct": 5.0, "day2_max_pct": 2.0 },
+      "weight": 0.3, "requires_close": true },
+    { "id": "T4", "name": "量价背离", "type": "divergence",
+      "condition": { "kind": "supply_demand_divergence", "price_product": "WTI", "supply_field": "ais_concurrent", "source": "straits_live" },
+      "weight": 0.2, "requires_close": false },
+    { "id": "T5", "name": "贵金属联动", "type": "spread",
+      "condition": { "kind": "correlated_move", "products": ["GOLD", "WTI"], "min_pct": 2.0, "direction": "same" },
+      "weight": 0.2, "requires_close": false }
+  ],
+
+  "link_metrics": [
+    { "name": "金银比", "code": "gold_silver_ratio", "formula": "GOLD_price / SILVER_price",
+      "products": ["GOLD", "SILVER"], "normal_range": [65, 85], "unit": "ratio" },
+    { "name": "铂金折价", "code": "platinum_discount", "formula": "PLATINUM_price - GOLD_price",
+      "products": ["PLATINUM", "GOLD"], "unit": "美元" }
+  ],
+
+  "scoring": {
+    "novelty_weight": 0.5,
+    "impact_weight": 0.2,
+    "reliability_weight": 0.2,
+    "tech_signal_weight": 0.1,
+    "push_threshold": 0.55,
+    "calibration_range": [0.35, 0.75]
+  },
+
+  "thresholds": {
+    "extreme_conditions": [
+      { "kind": "fundamental", "field": "crisis_pressure", "threshold": 90, "direction": "above", "source": "straits_live" },
+      { "kind": "price_change", "products": ["WTI"], "threshold_pct": 5.0, "direction": "either" },
+      { "kind": "price_change", "products": ["BRENT"], "threshold_pct": 5.0, "direction": "either" }
+    ]
+  },
+
+  "report_path": "C:\\Users\\yangd\\Documents\\QClaw\\Commodities\\Reports\\心跳监控",
+  "report_name_format": "heartbeat_report_HHmm.md",
+  "report_name_format_html": "heartbeat_report_HHmm.html",
+
+  "schedule": {
+    "default_interval_min": 120,
+    "non_trading_interval_min": 120,
+    "urgent_threshold": 0.7,
+    "downgrade_threshold": 0.3,
+    "max_urgent_cron_hours": 6,
+    "calibration_frequency": 10,
+    "focus_intervals": {
+      "geopolitics": [30, 60, 120],
+      "supply": [60, 90, 120],
+      "precious_metals": [60, 90, 120],
+      "policy": [60, 90, 120],
+      "default": [120, 120, 120]
+    }
+  },
+
+  "user_feedback": {
+    "enabled": true,
+    "learning_rate": 0.1,
+    "decay_days": 30,
+    "signal_type_weights": {
+      "geopolitics": 1.0, "supply": 1.0, "precious_metals": 1.0,
+      "demand": 1.0, "dollar": 1.0, "policy": 1.0
+    }
+  },
+
+  "initial_state": {
+    "signal_history": [],
+    "priority_history": [],
+    "pending_feedback": [],
+    "threshold_calibration": { "current_threshold": 0.55, "calibration_count": 0, "last_calibration": null },
+    "temp_cron_jobs": []
+  },
+
+  "red_rules": {
+    "no_fabricated_data": true,
+    "right_side_trading": true,
+    "min_quantifiable_signals": 2,
+    "primary_timeframe": "daily_4h",
+    "disclaimer_required": true,
+    "language": "zh-CN",
+    "no_emoji": true,
+    "novelty_guard_enabled": true
+  }
+}

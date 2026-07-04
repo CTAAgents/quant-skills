@@ -1,0 +1,201 @@
+# 聚酯链投研分析配置文件 v1.0.0
+
+# 数据源配置
+data_sources:
+  # 交易所数据
+  exchange:
+    enabled: true
+    priority: 0
+    symbols:
+      - PX
+      - TA
+      - EG
+      - PF
+      - PR
+    
+  # 专业API数据源
+  professional_api:
+    enabled: true
+    priority: 1
+    sources:
+      - neodata-financial-search
+      - westockdata
+    
+  # WebSearch数据源
+  web_search:
+    enabled: true
+    priority: 2
+    keywords:
+      - PXN
+      - PTA加工费
+      - MEG港口库存
+      - 聚酯负荷
+      - 织造订单
+    
+  # 中文财经媒体
+  chinese_media:
+    enabled: true
+    priority: 3
+    sources:
+      - 新浪财经
+      - 东方财富
+      - 财联社
+      - 隆众资讯
+      - 卓创资讯
+    
+  # AI推理（保底）
+  ai_inference:
+    enabled: true
+    priority: 4
+    note: "仅在前四方案全部失败时使用，必须标注'数据暂缺，基于历史数据推演'"
+
+# 打分权重配置
+scoring_weights:
+  # 三层漏斗权重
+  l1_annual: 0.30
+  l2_quarterly: 0.40
+  l3_weekly: 0.30
+  
+  # 驱动归属权重
+  px_driver_weight: 0.25
+  pta_driver_weight: 0.30
+  meg_driver_weight: 0.20
+  pf_driver_weight: 0.15
+  pr_driver_weight: 0.10
+
+# 阈值参数配置
+thresholds:
+  # PXN阈值
+  pxn_low: 200
+  pxn_high: 400
+  
+  # PTA加工费阈值
+  pta_processing_fee_low: 300
+  pta_processing_fee_high: 600
+  
+  # PF加工费阈值
+  pf_processing_fee_low: 800
+  pf_processing_fee_high: 1200
+  
+  # PR加工费阈值
+  pr_processing_fee_low: 300
+  pr_processing_fee_high: 550
+  
+  # MEG港口库存阈值
+  meg_port_inventory_low: 80
+  meg_port_inventory_high: 100
+  
+  # 聚酯负荷阈值
+  polyester_load_low: 80
+  polyester_load_high: 85
+  
+  # 汽油裂差阈值
+  gasoline_crack_threshold: 30
+  
+  # 地缘风险阈值
+  geopolitical_risk_threshold: 70
+
+# 套利信号配置
+arbitrage_signals:
+  # TA-EG价差
+  ta_eg_spread:
+    entry_percentile_low: 20
+    entry_percentile_high: 80
+    target_multiplier: 1.15
+    stop_loss_multiplier: 0.95
+  
+  # PF-TA加工差
+  pf_ta_spread:
+    entry_percentile_low: 20
+    entry_percentile_high: 80
+    target_multiplier: 1.15
+    stop_loss_multiplier: 0.95
+  
+  # TA月差
+  ta_term_structure:
+    entry_percentile_low: 20
+    entry_percentile_high: 80
+    target_multiplier: 1.15
+    stop_loss_multiplier: 0.95
+
+# 报告配置
+report:
+  # 报告格式
+  format: markdown
+  
+  # 报告类型
+  types:
+    - checklist
+    - full
+    - arbitrage
+  
+  # 报告保存路径
+  output_dir: output
+  
+  # 报告文件名模板
+  filename_template: "polyester_chain_{type}_{timestamp}.md"
+
+# 自动化配置
+automation:
+  # 是否启用自动化
+  enabled: true
+  
+  # 定时任务
+  schedules:
+    - name: "早盘分析"
+      time: "08:00"
+      report_type: "full"
+      description: "每日早盘前生成完整分析报告"
+    
+    - name: "收盘更新"
+      time: "20:00"
+      report_type: "arbitrage"
+      description: "每日收盘后更新套利信号和头寸建议"
+  
+  # 时区
+  timezone: "Asia/Shanghai"
+
+# 性能配置
+performance:
+  # 并行计算
+  parallel:
+    enabled: true
+    max_workers: 4
+  
+  # 缓存
+  cache:
+    enabled: true
+    ttl: 3600  # 缓存有效期（秒）
+  
+  # 超时
+  timeout: 300  # 单次执行超时（秒）
+
+# 日志配置
+logging:
+  level: INFO
+  format: "[%(asctime)s] %(levelname)s - %(message)s"
+  datefmt: "%Y-%m-%d %H:%M:%S"
+  file: "logs/polyester_chain.log"
+  max_bytes: 10485760  # 10MB
+  backup_count: 5
+
+# 测试配置
+testing:
+  # 单元测试
+  unit_tests:
+    enabled: true
+    coverage_threshold: 80
+  
+  # 集成测试
+  integration_tests:
+    enabled: true
+  
+  # 性能测试
+  performance_tests:
+    enabled: true
+    max_execution_time: 300  # 最大执行时间（秒）
+
+# 版本信息
+version: "1.0.0"
+last_updated: "2026-06-26"
+author: "谭溯源（掌柜）"

@@ -1,0 +1,70 @@
+{
+  "run_id": "20260625_032414",
+  "start_time": "2026-06-25T03:24:15.696134",
+  "end_time": "2026-06-25T03:24:16.296503",
+  "total_elapsed_sec": 0.6,
+  "stages": [
+    {
+      "name": "数据获取",
+      "elapsed_sec": 0.05,
+      "mem_before_mb": 32.2,
+      "mem_after_mb": 32.2,
+      "mem_delta_mb": 0.0,
+      "cpu_avg_percent": 0,
+      "status": "ok",
+      "notes": ""
+    },
+    {
+      "name": "指标计算",
+      "elapsed_sec": 0.013,
+      "mem_before_mb": 32.2,
+      "mem_after_mb": 32.2,
+      "mem_delta_mb": 0.0,
+      "cpu_avg_percent": 0,
+      "status": "ok",
+      "notes": ""
+    },
+    {
+      "name": "报告生成",
+      "elapsed_sec": 0.03,
+      "mem_before_mb": 32.2,
+      "mem_after_mb": 32.2,
+      "mem_delta_mb": 0.0,
+      "cpu_avg_percent": 0,
+      "status": "ok",
+      "notes": ""
+    }
+  ],
+  "system_start": {
+    "timestamp": "2026-06-25T03:24:15.700560",
+    "cpu_percent": 1.5,
+    "memory_total_mb": 8144.07421875,
+    "memory_used_mb": 5707.765625,
+    "memory_percent": 70.1,
+    "disk_read_mb": 11081.47705078125,
+    "disk_write_mb": 258532.03466796875
+  },
+  "system_end": {
+    "timestamp": "2026-06-25T03:24:16.298444",
+    "cpu_percent": 1.6,
+    "memory_total_mb": 8144.07421875,
+    "memory_used_mb": 5707.43359375,
+    "memory_percent": 70.1,
+    "disk_read_mb": 11081.47705078125,
+    "disk_write_mb": 258532.03466796875
+  },
+  "auto_tune_info": {
+    "io": {
+      "cpu_count": 6,
+      "mem_percent": 70.4,
+      "cpu_percent": 10.4,
+      "workers": 6
+    },
+    "cpu": {
+      "cpu_count": 6,
+      "mem_percent": 70.0,
+      "cpu_percent": 0.5,
+      "workers": 6
+    }
+  }
+}

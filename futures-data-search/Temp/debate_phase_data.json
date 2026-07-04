@@ -1,0 +1,1098 @@
+{
+  "report_time": "2026-07-02 19:56:52",
+  "varieties": [
+    "au",
+    "ag",
+    "cu",
+    "al",
+    "zn",
+    "pb",
+    "ni",
+    "sn",
+    "ao",
+    "SS",
+    "rb",
+    "hc",
+    "i",
+    "j",
+    "jm",
+    "SF",
+    "SM",
+    "sc",
+    "lu",
+    "fu",
+    "bu",
+    "pg",
+    "ec",
+    "PX",
+    "TA",
+    "PF",
+    "PR",
+    "eg",
+    "eb",
+    "pp",
+    "l",
+    "PL",
+    "bz",
+    "v",
+    "MA",
+    "SH",
+    "lc",
+    "si",
+    "ps",
+    "ru",
+    "nr",
+    "br",
+    "a",
+    "b",
+    "m",
+    "y",
+    "p",
+    "OI",
+    "RM",
+    "PK",
+    "c",
+    "cs",
+    "SR",
+    "CF",
+    "jd",
+    "lh",
+    "AP",
+    "CJ",
+    "rr",
+    "FG",
+    "SA",
+    "UR",
+    "sp"
+  ],
+  "summary": {
+    "total": 63,
+    "quality_normal": 0,
+    "quality_degraded": 0,
+    "quality_missing": 63,
+    "contango": 34,
+    "backwardation": 21,
+    "flat": 0
+  },
+  "data": {
+    "AU": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Unknown",
+      "z_score": -0.4772,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用",
+        "❌ 期限结构数据缺失(所有数据源不可用)"
+      ]
+    },
+    "AG": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Unknown",
+      "z_score": -0.0928,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用",
+        "❌ 期限结构数据缺失(所有数据源不可用)"
+      ]
+    },
+    "CU": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Flat",
+      "z_score": 0.9379,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "AL": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -0.1239,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "ZN": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": 0.7572,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "PB": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -3.2043,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用",
+        "⚠️ 极端Z分数: z=-3.20 > 2"
+      ]
+    },
+    "NI": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -0.395,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "SN": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": 0.9232,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "AO": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -0.7481,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "SS": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": 1.0556,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "RB": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": -0.9466,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "HC": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -0.3967,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "I": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": -1.6619,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "J": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": 1.4439,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "JM": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": 0.8958,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "SF": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": 0.2709,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "SM": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -0.6518,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "SC": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": -0.9775,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "LU": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Unknown",
+      "z_score": 0.0816,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用",
+        "❌ 期限结构数据缺失(所有数据源不可用)"
+      ]
+    },
+    "FU": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": -0.4287,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "BU": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": 0.276,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "PG": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": -0.2821,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "EC": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": 0.9493,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "PX": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -0.2533,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "TA": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": 0.0077,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "PF": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": -0.1259,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "PR": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": -0.1503,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "EG": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": -0.8752,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "EB": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": -0.4167,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "PP": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": -0.2035,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "L": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Unknown",
+      "z_score": -0.8242,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用",
+        "❌ 期限结构数据缺失(所有数据源不可用)"
+      ]
+    },
+    "PL": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": -0.2305,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "BZ": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": -0.1571,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "V": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -1.7386,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "MA": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": -0.3997,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "SH": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -1.5643,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "LC": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": 0.9704,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "SI": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -1.006,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "PS": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -1.3284,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "RU": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": 0.5259,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "NR": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": 1.0699,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "BR": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Unknown",
+      "z_score": -0.5329,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用",
+        "❌ 期限结构数据缺失(所有数据源不可用)"
+      ]
+    },
+    "A": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": 1.2264,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "B": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": 0.5472,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "M": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Flat",
+      "z_score": 0.2763,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "Y": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": 0.6122,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "P": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": 0.0788,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "OI": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": -0.1126,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "RM": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -1.0228,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "PK": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": 2.166,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用",
+        "⚠️ 极端Z分数: z=2.17 > 2"
+      ]
+    },
+    "C": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": 0.5921,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "CS": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": 1.0457,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "SR": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -0.9447,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "CF": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Unknown",
+      "z_score": 1.5529,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用",
+        "❌ 期限结构数据缺失(所有数据源不可用)"
+      ]
+    },
+    "JD": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Back",
+      "z_score": 2.7132,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用",
+        "⚠️ 极端Z分数: z=2.71 > 2"
+      ]
+    },
+    "LH": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": 0.1876,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "AP": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -1.0321,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "CJ": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -1.1831,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "RR": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -2.3059,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用",
+        "⚠️ 极端Z分数: z=-2.31 > 2"
+      ]
+    },
+    "FG": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -1.4808,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "SA": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -1.8247,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "UR": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -0.5139,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用"
+      ]
+    },
+    "SP": {
+      "price": {
+        "open": null,
+        "high": null,
+        "low": null,
+        "close": null,
+        "volume": null,
+        "oi": null
+      },
+      "term_structure": "Contango",
+      "z_score": -2.0443,
+      "data_quality": "❌缺失",
+      "notes": [
+        "❌ 报价数据缺失: 所有数据源均不可用",
+        "⚠️ 极端Z分数: z=-2.04 > 2"
+      ]
+    }
+  }
+}

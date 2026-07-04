@@ -1,0 +1,4 @@
+{"timestamp": "2026-06-30T08:43:50.203836", "variety": "HC", "issue_type": "far_price_zero", "source": "tdx_collector", "context": "远月价格=0,HC做空信号因数据异常被铁律排除,2026-06-30辩论发现", "debate_date": "2026-06-30", "severity": "high"}
+{"timestamp": "2026-06-30T08:43:50.439338", "variety": "RB", "issue_type": "term_structure_missing", "source": "tdx_collector", "context": "RB期限结构完全缺失,四层共振T1做空信号被迫降级为观察,2026-06-30辩论发现", "debate_date": "2026-06-30", "severity": "high"}
+{"timestamp": "2026-06-30T08:43:50.638249", "variety": "Y", "issue_type": "oi_missing", "source": "multi_source_adapter", "context": "OI缺失无法验证资金方向,y做多对冲仓位被迫降低,2026-06-30辩论发现", "debate_date": "2026-06-30", "severity": "medium"}
+{"timestamp": "2026-06-30T08:43:50.772749", "variety": "M", "issue_type": "oi_divergence", "source": "multi_source_adapter", "context": "价涨OI降(率=0.88),多头减仓反弹非增量做多,2026-06-30辩论发现", "debate_date": "2026-06-30", "severity": "medium"}

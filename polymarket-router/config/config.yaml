@@ -1,0 +1,145 @@
+# PolyMarket多源数据集成路由系统配置
+
+# 路由器配置
+router:
+  default_timeout: 10000
+  max_retries: 3
+  retry_delay: 1000
+  cache_strategy: local
+  cache_ttl: 300
+  log_level: INFO
+
+# 数据源配置
+sources:
+  # 主要数据源（优先级1）- Polymarket Gamma API
+  - name: "gamma-api"
+    type: "api"
+    priority: 1
+    endpoint: "https://gamma-api.polymarket.com"
+    health_check_interval: 30
+    timeout: 5000
+    max_retries: 3
+    retry_delay: 1000
+    enabled: true
+    metadata:
+      description: "PolyMarket官方Gamma API"
+      capabilities: ["search", "events", "markets", "tags"]
+      requires_auth: false
+
+  # 备用API数据源（优先级2）- Polymarket CLOB API
+  - name: "clob-api"
+    type: "api"
+    priority: 2
+    endpoint: "https://clob.polymarket.com"
+    health_check_interval: 30
+    timeout: 5000
+    max_retries: 3
+    retry_delay: 1000
+    enabled: true
+    metadata:
+      description: "PolyMarket CLOB订单簿API"
+      capabilities: ["price", "book", "trades"]
+      requires_auth: true
+
+  # Web数据源（优先级3）- Polyspotter
+  - name: "polyspotter"
+    type: "web"
+    priority: 3
+    url: "https://polyspotter.com"
+    health_check_interval: 60
+    timeout: 10000
+    max_retries: 2
+    retry_delay: 2000
+    enabled: true
+    metadata:
+      description: "Polyspotter替代数据源"
+      capabilities: ["search", "markets"]
+      scrape_method: "python"
+
+  # 其他Web数据源（优先级4）
+  - name: "polymarketanalytics"
+    type: "web"
+    priority: 4
+    url: "https://polymarketanalytics.com"
+    health_check_interval: 120
+    timeout: 10000
+    max_retries: 2
+    retry_delay: 2000
+    enabled: true
+    metadata:
+      description: "Polymarket分析网站"
+      capabilities: ["analytics", "markets"]
+      scrape_method: "webfetch"
+
+  # 本地缓存（优先级10，作为最后手段）
+  - name: "local-cache"
+    type: "cache"
+    priority: 10
+    health_check_interval: 300
+    timeout: 100
+    max_retries: 1
+    retry_delay: 0
+    enabled: true
+    metadata:
+      description: "本地数据缓存"
+      capabilities: ["cached_data"]
+      ttl: 3600
+
+# 数据源发现配置
+discovery:
+  enabled: true
+  interval: 3600
+  search_queries:
+    - "Polymarket prediction market API"
+    - "alternative to polymarket data"
+    - "Polymarket data source"
+    - "Polymarket API alternative"
+    - "prediction market data API"
+  source_verification_interval: 86400
+  max_sources: 20
+  min_reliability_score: 0.3
+  known_authoritative_patterns:
+    - "polymarket\\.com"
+    - "polymarket\\.io"
+    - "polymarketapi\\.com"
+    - "polyspotter\\.com"
+    - "polymarketanalytics\\.com"
+    - "polymarkettrade\\.app"
+    - "polymarket-alternative\\.com"
+
+# 路由策略配置
+routing:
+  strategy: "priority"
+  enable_load_balancing: false
+  enable_request_merging: false
+  merge_window: 100
+
+# 缓存配置
+cache:
+  type: "local"
+  max_size: 1000
+  default_ttl: 300
+  cleanup_interval: 60
+
+# 监控和日志配置
+monitoring:
+  enabled: true
+  metrics_interval: 60
+  log_file: "polymarket-router.log"
+  log_rotation_size: 10
+  log_retention_days: 30
+
+# 安全配置
+security:
+  enable_api_key_auth: false
+  api_key: ""
+  enable_rate_limiting: false
+  rate_limit: 100
+  enable_request_signing: false
+
+# 性能配置
+performance:
+  enable_connection_pool: true
+  connection_pool_size: 10
+  enable_compression: true
+  enable_http2: true

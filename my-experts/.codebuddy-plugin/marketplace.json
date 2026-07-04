@@ -1,0 +1,11 @@
+{
+  "name": "my-experts",
+  "description": "my-experts marketplace (auto-generated)",
+  "plugins": [
+    {
+      "name": "futures-debate-team",
+      "source": "./plugins/futures-debate-team",
+      "description": "Multi-role futures trading debate team v4.0 — 十一角色全景：数技源(数据管道)→量析师(策略层打分)→研究员(供弹)→辩手(开火)→风控(叫停)。策略可插拔(默认L1-L4)，链证源只做景气度不下结论，正反方引用4层证据。"
+    }
+  ]
+}
