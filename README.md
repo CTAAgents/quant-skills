@@ -1,6 +1,6 @@
 # Quant Skills
 
-**量化交易与智能体技能库** - 包含23个自建skill
+**量化交易与智能体技能库** - 包含22个自建skill
 
 | 技能名称 | 描述 |
 |----------|------|
@@ -19,7 +19,6 @@
 | **commodity-trend-signal** | 商品期货趋势信号发现系统 v2.18.0 — L1-L4四层打分+TQ-Local桥接+评分单源真理原则+内联评分检测器。多空双向扫描全市场，100分制多维打分识别趋势启动/主升/主跌阶段。内置全品种 |
 | **embodiskill** | "EmbodiSkill v2.0: 面向具身技能自演化的技能感知反思与进化（自演化增强版）" |
 | **factorengine** | "FactorEngine v2.0: 程序级知识注入因子挖掘框架（技能演化增强版）" |
-| **fundamental-data-collector** | 基本面数据采集器 v1.0.0 — 为辩论专家团·基本面研究员（探源）提供供给、需求、库存、利润、期限结构的真实数据查询。权重策略归位于独立 skill，不再耦合 commodity-chain-an |
 | **futures-data-search** | 国内期货数据统一调度中心 v4.1.0。MultiSourceAdapter 多源自动降级：tdx_local→TqSDK→东方财富→交易所API→AKShare。盘中/盘后双优先级链，内置DuckD |
 | **goal** | 复刻 Claude Code /goal 命令。管理长期会话目标：设定、查看、清除。当用户输入 /goal 或 /goal <文本> 时触发。 |
 | **loop** | 复刻 Claude Code /loop 命令。反复执行用户任务直到达成或终止。支持固定间隔、动态间隔、停滞检测、熔断机制。当用户输入 /loop 或 /loop <间隔> <任务> 时触发。 |
@@ -30,4 +29,4 @@
 
 ---
 
-**最后更新**: 2026-07-04 21:11
+**最后更新**: 2026-07-04 21:16
