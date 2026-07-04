@@ -1,7 +1,8 @@
 ---
 name: technical-indicator-calc
 version: 2.4.0
-description: 技术指标计算最后保障 — 通达信公式完全对齐。当TdxCollector.get_indicators()失败时，提供与通达信100%一致的numpy向量化计算。18组公式/44项指标，Wilder平滑/EMA/SMA参数完全对齐TDX。支持Donchian/Vortex/HMA/CMF/BB等高级指标。
+description: 技术指标计算最后保障 —
+  通达信公式完全对齐。当TdxCollector.get_indicators()失败时，提供与通达信100%一致的numpy向量化计算。18组公式/44项指标，Wilder平滑/EMA/SMA参数完全对齐TDX。支持Donchian/Vortex/HMA/CMF/BB等高级指标。
 agent_created: true
 user_invocable: true
 triggers:
@@ -24,6 +25,7 @@ triggers:
   - 资金流量
   - 量价背离
   - K线形态识别
+disable: false
 ---
 
 # Technical Indicator Calculator — Last Resort Fallback v2.4.0

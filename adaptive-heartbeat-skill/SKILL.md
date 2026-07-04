@@ -1,7 +1,8 @@
 ---
 name: adaptive-heartbeat-skill
 version: 3.0.0
-description: 自适应心跳监控系统 v3 — 通用8步工作流引擎，所有差异化配置通过 monitor_config.json 注入。支持交易时段判断、多数据源健康评估、四维信号评分、自适应调度、阈值自动校准。一个引擎驱动任意品种/市场的自适应监控。
+description: 自适应心跳监控系统 v3 — 通用8步工作流引擎，所有差异化配置通过 monitor_config.json
+  注入。支持交易时段判断、多数据源健康评估、四维信号评分、自适应调度、阈值自动校准。一个引擎驱动任意品种/市场的自适应监控。
 agent_created: true
 user_invocable: true
 triggers:
@@ -15,6 +16,7 @@ triggers:
   - 多数据源降级
   - 实时行情监控
   - 新闻监控
+disable: true
 ---
 
 # Adaptive Heartbeat Monitor — Universal Skill

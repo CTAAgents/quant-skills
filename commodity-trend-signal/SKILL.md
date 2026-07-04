@@ -1,9 +1,11 @@
 ---
 name: commodity-trend-signal
 version: 2.18.0
-description: 商品期货趋势信号发现系统 v2.18.0 — L1-L4四层打分+TQ-Local桥接+评分单源真理原则+内联评分检测器。多空双向扫描全市场，100分制多维打分识别趋势启动/主升/主跌阶段。内置全品种扫描CLI，可与 commodity-chain-analysis 配合使用。
-  L1层包含期货专属信号：OI三角、基差走强、期限结构、跨期Spread。解决"推荐已走远品种"问题。
-  支持单品分析 + 全品种批量扫描，可独立使用或与 commodity-chain-analysis 配合进行产业链验证。
+description: 商品期货趋势信号发现系统 v2.18.0 —
+  L1-L4四层打分+TQ-Local桥接+评分单源真理原则+内联评分检测器。多空双向扫描全市场，100分制多维打分识别趋势启动/主升/主跌阶段。内置全品种扫描CLI，可与
+  commodity-chain-analysis 配合使用。
+  L1层包含期货专属信号：OI三角、基差走强、期限结构、跨期Spread。解决"推荐已走远品种"问题。 支持单品分析 + 全品种批量扫描，可独立使用或与
+  commodity-chain-analysis 配合进行产业链验证。
 agent_created: true
 user_invocable: true
 triggers:
@@ -26,6 +28,7 @@ triggers:
   - 每日操作SOP
   - TQ-Local
   - 通达信指标
+disable: true
 ---
 
 # 商品期货趋势信号发现系统 v2.16.0

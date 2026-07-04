@@ -14,9 +14,9 @@
 | **"skill-adaptor"** | "基于轨迹的LLM智能体自适应技能框架，具有显式故障归因。当需要分析执行轨迹、识别故障并改进智能体技能时调用。" |
 | **Polymarket** | Polymarket预测市场多源数据集成路由系统。通过CLI查询实时赔率和事件，多数据源自动故障转移+健康监控+本地缓存。覆盖体育、政治、加密货币等。 |
 | **a-share-etf-momentum** | A股行业ETF双动量轮动策略 — 绝对动量择时+相对动量轮动+估值分位刹车。通过沪深300ETF判断市场趋势，多头轮动持有最强行业ETF，熊市切换货币ETF。支持完整回测与实盘调仓信号，年化44.30 |
-| **adaptive-heartbeat-skill** | 自适应心跳监控系统 v3 — 通用8步工作流引擎，所有差异化配置通过 monitor_config.json 注入。支持交易时段判断、多数据源健康评估、四维信号评分、自适应调度、阈值自动校准。一个引擎 |
+| **adaptive-heartbeat-skill** | 自适应心跳监控系统 v3 — 通用8步工作流引擎，所有差异化配置通过 monitor_config.json   注入。支持交易时段判断、多数据源健康评估、四维信号评分、自适应调度、阈值自动校准。一个 |
 | **agentic-factor-investing** | "Agentic AI 因子投资框架 v2.0：自主因子发现与系统化投资（技能演化增强版）" |
-| **commodity-trend-signal** | 商品期货趋势信号发现系统 v2.18.0 — L1-L4四层打分+TQ-Local桥接+评分单源真理原则+内联评分检测器。多空双向扫描全市场，100分制多维打分识别趋势启动/主升/主跌阶段。内置全品种 |
+| **commodity-trend-signal** | 商品期货趋势信号发现系统 v2.18.0 —   L1-L4四层打分+TQ-Local桥接+评分单源真理原则+内联评分检测器。多空双向扫描全市场，100分制多维打分识别趋势启动/主升/主跌阶段。内置全 |
 | **embodiskill** | "EmbodiSkill v2.0: 面向具身技能自演化的技能感知反思与进化（自演化增强版）" |
 | **factorengine** | "FactorEngine v2.0: 程序级知识注入因子挖掘框架（技能演化增强版）" |
 | **futures-data-search** | 国内期货数据统一调度中心 v4.1.0。MultiSourceAdapter 多源自动降级：tdx_local→TqSDK→东方财富→交易所API→AKShare。盘中/盘后双优先级链，内置DuckD |
@@ -25,8 +25,8 @@
 | **quantitative-momentum-stock-selection** | 量化动量选股系统 v1.1.0 (A股优化版) — 多维度动量打分体系识别强势股票，构建动量投资组合。核心思想：买入赢家股而非成长型投资。支持全市场扫描、动量信号筛选、投资组合构建、回测验证。A股优化 |
 | **skill-audit** | "全面审计 WorkBuddy Skill 的方法论工具。通过10轮标准化流程—代码审查、测试修复、数据去重、文档一致性—系统性发现并修复 Bug、死代码、冗余和架构健康问题。审计完成后输出结构化报告 |
 | **skillevolver** | "SkillEvolver v2.0: 面向在线技能学习的元技能框架（自演化增强版）" |
-| **technical-indicator-calc** | 技术指标计算最后保障 — 通达信公式完全对齐。当TdxCollector.get_indicators()失败时，提供与通达信100%一致的numpy向量化计算。18组公式/44项指标，Wilder平 |
+| **technical-indicator-calc** | 技术指标计算最后保障 —   通达信公式完全对齐。当TdxCollector.get_indicators()失败时，提供与通达信100%一致的numpy向量化计算。18组公式/44项指标，Wilde |
 
 ---
 
-**最后更新**: 2026-07-04 22:02
+**最后更新**: 2026-07-05 01:59
