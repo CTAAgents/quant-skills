@@ -1,34 +1,38 @@
-# A股ETF双动量轮动策略 v1.7
+# A股ETF双动量轮动策略 v1.9
 
 ## 概述
 
 本skill实现了经典的双动量（Dual Momentum）策略，专为A股市场ETF轮动设计。
 
 **核心逻辑**：
-1. **绝对动量**（金丝雀）：沪深300ETF 90日收益率 > 0 → 允许持有行业ETF
-2. **相对动量**（赛马）：选取50日收益率最高的行业ETF（参数优化最佳窗口）
+1. **绝对动量**（金丝雀）：沪深300ETF 120日收益率 > 0 → 允许持有行业ETF
+2. **相对动量**（赛马）：选取50日收益率最高的行业ETF
 3. **估值刹车**：PE分位 > 80% 且涨幅 > 30% → 跳过过热标的
-4. **调仓频率**：月频调仓（参数优化最佳频率）
+4. **调仓频率**：月频调仓
 
 ## 快速开始
 
 ### 安装依赖
 
 ```bash
-pip install akshare pandas numpy pyarrow pytest
+pip install pandas numpy pyarrow pytest
 ```
 
 ### 命令行使用（推荐）
 
 ```bash
-# 运行回测
+# 运行回测（默认使用腾讯自选股数据源）
 python -m scripts.main backtest
+
+# 指定数据源
+python -m scripts.main backtest --source tdx        # 使用通达信数据源
+python -m scripts.main backtest --source akshare    # 使用AKShare数据源
 
 # 生成实时调仓信号
 python -m scripts.main signal
 
 # 更新数据缓存
-python -m scripts.main update
+python -m scripts.main update --force
 
 # 显示当前配置
 python -m scripts.main config
@@ -83,7 +87,7 @@ report.generate_html("backtest_report.html")
 
 | 参数 | 默认值 | 说明 |
 |------|--------|------|
-| `momentum_window` | 90 | 动量窗口（交易日） |
+| `momentum_window` | 120 | 绝对动量窗口（交易日）- v1.9优化 |
 | `top_n` | 1 | 相对动量选取数量 |
 | `abs_momentum_threshold` | 0.0 | 绝对动量阈值 |
 | `valuation_pe_threshold` | 80 | PE分位刹车阈值（%） |
@@ -96,7 +100,7 @@ report.generate_html("backtest_report.html")
 ## 模块说明
 
 - `config.py`: 策略参数配置、ETF到指数映射
-- `data_collector.py`: ETF数据采集（AKShare）+ 本地缓存
+- `data_collector.py`: ETF数据采集（westock/TDX多源）+ 前复权 + 本地缓存
 - `momentum.py`: 动量计算、估值分位获取与计算
 - `strategy.py`: 策略核心逻辑
 - `backtest.py`: 回测引擎
@@ -131,6 +135,18 @@ pytest tests/ -v --cov=scripts
 4. 回测结果不代表未来收益
 
 ## 版本历史
+
+### v1.9.0 (2026-07-08)
+- 训练/测试参数优化：28组网格搜索（abs×rel），3年训练+2年测试
+- 默认参数更新：momentum_window 90→120天，基于优化结果
+- 长窗口在熊市反弹中更稳健，测试期年化60.9%、夏普1.43
+- 修复净值曲线 numpy 类型 JS 兼容问题
+
+### v1.8.0 (2026-07-08)
+- 数据源重构：默认使用腾讯自选股(westock)主数据源 + 通达信TQ-Local(tdx)备用数据源
+- 通达信数据默认前复权，westock数据默认前复权
+- CLI新增 `--source` 参数支持手动指定数据源
+- 多源自动降级：westock → tdx → 本地缓存
 
 ### v1.5.0 (2026-06-26)
 - **默认动量窗口调整**：将默认动量窗口从252天调整为90天（约4.5个月），更适合A股市场中期趋势捕捉

@@ -47,8 +47,8 @@ class Config:
     ))
 
     # ========== 动量参数 ==========
-    momentum_window: int = 90  # 绝对动量窗口（交易日，约4.5个月）
-    relative_momentum_window: int = 50  # 相对动量窗口（交易日）- 参数优化最佳窗口
+    momentum_window: int = 120  # 绝对动量窗口（交易日，约6个月）- v1.9训练/测试优化
+    relative_momentum_window: int = 50  # 相对动量窗口（交易日）- v1.9训练/测试优化
     rebalance_freq: str = "monthly"  # 调仓频率 - 参数优化最佳频率
     top_n: int = 1  # 相对动量选取数量
 
@@ -67,7 +67,11 @@ class Config:
     slippage_rate: float = 0.0001  # 滑点（万分之一）
 
     # ========== 数据源配置 ==========
-    data_source: str = "akshare"  # akshare / westock / local
+    data_source: str = "westock"  # 主数据源: westock(腾讯自选股) / akshare / local
+    backup_data_source: str = "tdx"  # 备用数据源: tdx(通达信TQ-Local)
+    tdx_host: str = "http://127.0.0.1:17709/"  # 通达信TQ-Local HTTP服务地址
+    tdx_dividend_type: str = "front"  # 通达信复权类型: front(前复权) / back(后复权) / none(不复权)
+    westock_dividend_type: str = "qfq"  # 腾讯自选股复权类型: qfq(前复权) / hfq(后复权) / bfq(不复权)
     cache_dir: str = "cache"  # 本地缓存目录
 
     # ========== 回测配置 ==========
@@ -78,6 +82,27 @@ class Config:
     # ========== 输出配置 ==========
     output_dir: str = "reports"
     log_trades: bool = True
+
+    # ========== ETF代码格式映射 ==========
+    @staticmethod
+    def to_westock_code(etf_code: str) -> str:
+        """将ETF代码转换为腾讯自选股格式 (sh/sz前缀)"""
+        if etf_code.startswith(("51", "56", "58", "60")):
+            return f"sh{etf_code}"
+        elif etf_code.startswith(("15", "16", "30")):
+            return f"sz{etf_code}"
+        else:
+            return f"sh{etf_code}"  # default to Shanghai
+
+    @staticmethod
+    def to_tdx_code(etf_code: str) -> str:
+        """将ETF代码转换为通达信TQ-Local格式 (.SH/.SZ后缀)"""
+        if etf_code.startswith(("51", "56", "58", "60")):
+            return f"{etf_code}.SH"
+        elif etf_code.startswith(("15", "16", "30")):
+            return f"{etf_code}.SZ"
+        else:
+            return f"{etf_code}.SH"  # default to Shanghai
 
     @property
     def all_etf_codes(self) -> List[str]:

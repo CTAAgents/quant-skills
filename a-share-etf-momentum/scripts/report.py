@@ -39,10 +39,10 @@ class ReportGenerator:
         """构建HTML内容"""
         r = self.result
 
-        # 准备图表数据
+        # 准备图表数据（numpy类型转Python原生类型，确保JS兼容）
         dates = [record.date.strftime("%Y-%m-%d") for record in r.daily_records]
-        navs = [record.nav for record in r.daily_records]
-        benchmark_navs = [record.benchmark_nav for record in r.daily_records]
+        navs = [float(record.nav) for record in r.daily_records]
+        benchmark_navs = [float(record.benchmark_nav) for record in r.daily_records]
         holdings = [record.holding_name for record in r.daily_records]
 
         # 调仓记录表格

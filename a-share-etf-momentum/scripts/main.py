@@ -26,7 +26,8 @@ def run_backtest(config: Config, output_dir: str = None):
     print("=" * 60)
 
     # 1. 初始化配置
-    print(f"\n[配置] 动量窗口: {config.momentum_window}天")
+    print(f"\n[配置] 数据源: {config.data_source}（主）, {config.backup_data_source}（备）")
+    print(f"[配置] 动量窗口: {config.momentum_window}天（绝对）/ {config.relative_momentum_window}天（相对）")
     print(f"[配置] 初始资金: ¥{config.initial_capital:,.0f}")
     print(f"[配置] 回测区间: {config.backtest_start} 至 {config.backtest_end}")
     print(f"[配置] 估值刹车: {'启用' if config.valuation_enabled else '禁用'}")
@@ -91,6 +92,7 @@ def generate_signal(config: Config):
     print("A股ETF双动量轮动策略 - 实时调仓信号")
     print("=" * 60)
     print(f"当前时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"数据源: {config.data_source}（主）, {config.backup_data_source}（备）")
 
     # 1. 初始化
     collector = ETFDataCollector(config)
@@ -199,6 +201,13 @@ def show_config(config: Config):
     print(f"  单边手续费: {config.commission_rate:.2%}")
     print(f"  滑点: {config.slippage_rate:.2%}")
 
+    print("\n【数据源配置】")
+    print(f"  主数据源: {config.data_source}（腾讯自选股）")
+    print(f"  备用数据源: {config.backup_data_source}（通达信TQ-Local）")
+    print(f"  通达信复权: {config.tdx_dividend_type}（前复权）")
+    print(f"  WeStock复权: {config.westock_dividend_type}（前复权）")
+    print(f"  缓存目录: {config.cache_dir}")
+
     print("\n【回测配置】")
     print(f"  回测区间: {config.backtest_start} 至 {config.backtest_end}")
 
@@ -210,12 +219,13 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 示例:
-  python -m scripts.main backtest                    # 运行回测
+  python -m scripts.main backtest                    # 运行回测（默认westock数据源）
   python -m scripts.main signal                      # 生成实时信号
   python -m scripts.main update                      # 更新数据缓存
   python -m scripts.main config                      # 显示当前配置
   python -m scripts.main backtest --no-valuation     # 禁用估值刹车回测
   python -m scripts.main backtest --start 2020-01-01 # 指定回测起始日期
+  python -m scripts.main backtest --source tdx       # 使用通达信数据源回测
         """
     )
 
@@ -228,14 +238,20 @@ def main():
     bt_parser.add_argument("--capital", type=float, help="初始资金")
     bt_parser.add_argument("--no-valuation", action="store_true", help="禁用估值刹车")
     bt_parser.add_argument("--output", help="输出目录")
+    bt_parser.add_argument("--source", choices=["westock", "tdx", "akshare"],
+                          help="指定数据源（覆盖默认配置）")
 
     # signal 子命令
     sig_parser = subparsers.add_parser("signal", help="生成实时调仓信号")
     sig_parser.add_argument("--no-valuation", action="store_true", help="禁用估值刹车")
+    sig_parser.add_argument("--source", choices=["westock", "tdx", "akshare"],
+                          help="指定数据源（覆盖默认配置）")
 
     # update 子命令
     upd_parser = subparsers.add_parser("update", help="更新ETF数据缓存")
     upd_parser.add_argument("--force", action="store_true", help="强制刷新缓存")
+    upd_parser.add_argument("--source", choices=["westock", "tdx", "akshare"],
+                          help="指定数据源（覆盖默认配置）")
 
     # config 子命令
     subparsers.add_parser("config", help="显示当前配置")
@@ -254,14 +270,20 @@ def main():
             config.initial_capital = args.capital
         if args.no_valuation:
             config.valuation_enabled = False
+        if args.source:
+            config.data_source = args.source
         run_backtest(config, args.output)
 
     elif args.command == "signal":
         if args.no_valuation:
             config.valuation_enabled = False
+        if args.source:
+            config.data_source = args.source
         generate_signal(config)
 
     elif args.command == "update":
+        if args.source:
+            config.data_source = args.source
         update_data(config, args.force)
 
     elif args.command == "config":
