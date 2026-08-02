@@ -1,0 +1,18 @@
+# ===== ML因子建模核心依赖 =====
+# 安装方式：pip install -r requirements.txt
+# Python版本：>= 3.10 (推荐 3.12)
+
+# ---- 数据处理 ----
+pandas>=2.0.0
+numpy>=1.24.0
+
+# ---- 机器学习 ----
+lightgbm>=4.0.0
+
+# ---- 统计计算（可选，IC计算降级使用numpy） ----
+scipy>=1.10.0
+
+# ===== 完整回测系统依赖（可选，仅运行run_phase_*.py时需要） =====
+# duckdb>=0.8.0         # 数据存储（从DuckDB加载K线数据）
+# matplotlib>=3.7.0     # 回测图表
+# seaborn>=0.12.0       # 回测图表（可选）
